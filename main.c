@@ -52,27 +52,26 @@ int computerMove(){
 }
 
 int checkWinner(char* winner){
-    //check for columns
+    //check for columns and rows
     for(int i=0; i<3; i++){
-        if(board[0][i] == board[1][i] == board[2][i]){
+        if(board[0][i] == board[1][i] && board[1][i] == board[2][i] && board[0][i] != ' '){
             *winner = board[0][i];
             return 1;
-        } 
-    }
-    //check for rows
-    for(int i=0; i<3; i++){
-        if(board[i][0] == board[i][1] == board[i][2]){
+        }
+        if(board[i][0] == board[i][1] && board[i][1] == board[i][2] && board[i][0] != ' '){
+            printf("Debug in checkWinner: row %d is active", i);
             *winner = board[i][0];
             return 1;
         } 
     }
     //check for diagonals
-    if(board[0][0] == board[1][1] == board[2][2] || board[0][2] == board[1][1] == board[2][0]){
+    if((board[0][0] == board[1][1] && board[1][1] == board[2][2] && board[0][0] != ' ')||( board[0][2] == board[1][1] && board[1][1] == board[2][0] && board[1][1] != ' ')){
          *winner = board[1][1];
          return 1;
     }
     return 0;
 }
+
 void printWInner(char winner){
     printf("The winner is : %c\n", winner);
 }
@@ -101,8 +100,8 @@ int main(){
         showBoard();
         success = playerMove();
         success = computerMove();
-        printf("IM HERE ##### ---> %d \n", win);
         win = checkWinner(&winner);
+        printf("Debug---Winner = %c ---Win = %d --- \n", winner, win);
     }
     if(win == 0) checkWinner(&winner);
     printWInner(winner);
