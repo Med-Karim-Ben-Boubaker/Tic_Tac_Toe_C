@@ -1,8 +1,5 @@
-//Global Variables
-    char board[3][3];
-    char const PLAYER1;
-    char const PLAYER2;
-    char const COMPUTER;
+#ifndef DECLARATION_H_
+#define DECLARATION_H_
 //Global Functions
     void resetBoard();
     void showBoard();
@@ -15,8 +12,4 @@
     void playModePlyaerVsPlayer(char* winner, int* success, int* winState);
     void playModePlyaerVsComputer(char* winner, int* success, int* winState);
 
-//Main Variables
-    char winner;
-    int success;
-    int winState;
-    int playMode;
+    #endif

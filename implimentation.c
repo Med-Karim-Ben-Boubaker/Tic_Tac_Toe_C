@@ -3,11 +3,14 @@
 #include <ctype.h>
 #include "declaration.h"
 
+//declaration for some global variables
+char board[3][3];
 char const PLAYER1 = 'X';
 char const PLAYER2 = 'O';
 char const COMPUTER = 'O';
 
 void resetBoard(){
+//With this function, the board elements are reset to a space character.
     for(int i=0; i<3; i++){
         for(int j=0; j<3; j++){
             board[i][j] = ' ';
@@ -15,12 +18,14 @@ void resetBoard(){
     }
 }
 void showBoard(){
+//The current state of the board is printed by this function.
     for(int i=0; i<3; i++){
         printf(" %c | %c | %c\n", board[i][0], board[i][1], board[i][2]);
         printf("---|---|---\n");
     }
 }
 int checkFreeSpaces(){
+//If there is an empty space on the board, this function returns 1; otherwise, it returns 0.
     for(int i=0; i<3; i++){
         for(int j=0; j<3; j++){
             if(board[i][j] == ' ') return 1;
@@ -29,6 +34,8 @@ int checkFreeSpaces(){
     return 0;
 }
 int playerMove(char player){
+//This function allows the player to specify a precise position to place his X or O.
+//The user enters his location from left to right (1 to 9) and the position is automatically mapped to the right coordinate.
     if (checkFreeSpaces() == 0) return 0;
     int choice;
     printf("Enter the position of your %c, from 1 -> 9:\n", player);
@@ -43,6 +50,8 @@ int playerMove(char player){
 }
 
 int computerMove(){
+//This function generates a computer move; the movements are now completely random,
+//but future upgrades will make them more intelligent.
     if (checkFreeSpaces() == 0) return 0;
     while(1){
         int choice = rand()%9 +1;
@@ -85,6 +94,7 @@ void showMenue(int* playMode){
 }
 
 void playModePlyaerVsPlayer(char* winner, int* success, int* winState){
+//This function activates the player versus. player mode.
     resetBoard();
     while(*success && !(*winState)){
         showBoard();
@@ -98,6 +108,7 @@ void playModePlyaerVsPlayer(char* winner, int* success, int* winState){
 }
 
 void playModePlyaerVsComputer(char* winner, int* success, int* winState){
+//This function activates the player versus. computer mode.
     resetBoard();
     while(*success && !(*winState)){
         showBoard();
